@@ -23,4 +23,13 @@ Route::get('login', function() {
 
 Route::get('dashboard', function() {
     return view('dashboard');
-});
+})->name('dashboard');
+
+
+Route::get('services', function() {
+    return view('services');
+})->name('services');
+
+Route::get('add-service', function() {
+    return view('addNewServiceForm');
+})->name('add-service');
