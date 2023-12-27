@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,19 +17,25 @@ Route::get('/', function () {
     return view('feedback-form');
 });
 
-Route::get('login', function() {
-    return view('login');
-})->name('login');
-
-Route::get('dashboard', function() {
-    return view('dashboard');
-})->name('dashboard');
+// Authentication Routes
+Route::middleware(['guest'])->group(function() {
+    Route::get('/login', [AuthenticationController::class, 'login_view'])->name('login.view');
+    Route::post('/login', [AuthenticationController::class, 'login_process'])->name('login.process');
+});
 
 
-Route::get('services', function() {
-    return view('services');
-})->name('services');
+// Authenticated Users Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', function() {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::get('add-service', function() {
-    return view('addNewServiceForm');
-})->name('add-service');
+    Route::get('services', function() {
+        return view('services');
+    })->name('services');
+    
+    Route::get('add-service', function() {
+        return view('addNewServiceForm');
+    })->name('add-service');
+});
+

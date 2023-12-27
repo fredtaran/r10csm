@@ -40,7 +40,7 @@
                     </div>
 
                     <!-- New services form -->
-                    <form id="newServiceForm">
+                    <form action="#" method="POST" id="newServiceForm">
                         <div class="card-body">
                             <!-- Service code -->
                             <div class="form-group">
