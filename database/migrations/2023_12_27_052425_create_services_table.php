@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('service_code');
             $table->string('service_name');
-            $table->foreign('division_id')->references('id')->on('divisions');
+            $table->unsignedBigInteger('division_id');
             $table->timestamps();
+
+            $table->foreign('division_id')->references('id')->on('divisions')->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('survey_logs', function (Blueprint $table) {
             $table->id();
             $table->string('control_no')->unique();
+            $table->unsignedBigInteger('division_id');
             $table->foreign('division_id')->references('id')->on('divisions');
+            $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             $table->unsignedSmallInteger('age');
-            $table->enum('sex', ['1', '2']); // 1 - Male, 2 - Female
-            $table->enum('region', ['1', '2', '3', '4-A', '4-B', '5', '6', '7', '8', '9', '10', '11', '12', '13', 'CAR']);
-            $table->enum('client_type', ['1', '2', '3']); // 1 - Citizen, 2 - Business, 3 - Government
+            $table->unsignedInteger('sex'); // 1 - Male, 2 - Female
+            $table->string('region');
+            $table->unsignedInteger('client_type'); // 1 - Citizen, 2 - Business, 3 - Government
             $table->string('agency_visited');
             $table->unsignedSmallInteger('cc1');
             $table->unsignedSmallInteger('cc2');

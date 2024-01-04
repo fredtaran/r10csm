@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\AuthenticatedController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,12 +32,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('services', function() {
-        return view('services');
-    })->name('services');
-    
-    Route::get('add-service', function() {
-        return view('addNewServiceForm');
-    })->name('add-service');
+    Route::get('services', [AuthenticatedController::class, 'services_view'])->name('services.view');
+    Route::post('services', [AuthenticatedController::class, 'save_service'])->name('services.save_service');
+    Route::get('services/all', [AuthenticatedController::class, 'get_services'])->name('services.get_services');
+    Route::get('service/{id}/edit', [AuthenticatedController::class, 'get_service'])->name('services.get_service');
+    Route::post('service/{id}/edit', [AuthenticatedController::class, 'update_service'])->name('services.update_service');
+    Route::delete('service/{id}/delete', [AuthenticatedController::class, 'delete_service'])->name('services.delete_service');
 });
 

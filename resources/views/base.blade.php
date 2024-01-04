@@ -29,6 +29,8 @@
         <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
         @yield('page_custom_css')
     </head>
 
@@ -100,7 +102,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info">
-                    <a href="#" class="d-block">Earl Ven Kirby M. Budiongan</a>
+                    <a href="#" class="d-block">{{ Auth::user()->name }}
                 </div>
             </div>
 
@@ -115,7 +117,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('services') }}" class="nav-link">
+                        <a href="{{ route('services.view') }}" class="nav-link">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>Services</p>
                         </a>
@@ -222,6 +224,8 @@
         <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
         <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
         <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+        <!-- SweetAlert2 -->
+        <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 
