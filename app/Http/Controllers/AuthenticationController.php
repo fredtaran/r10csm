@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthenticationController extends Controller
 {
@@ -32,5 +33,12 @@ class AuthenticationController extends Controller
         return back()->withErrors([
             'username' => 'The provided credentials do not match our records.'
         ]);
+    }
+
+    // Logout process
+    public function logout(Request $request) {
+        Session::flush();
+        Auth::logout();
+        return redirect()->intended(route('login.view'));
     }
 }

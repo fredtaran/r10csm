@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\AuthenticatedController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +16,15 @@ use App\Http\Controllers\AuthenticatedController;
 |
 */
 
-Route::get('/', function () {
-    return view('feedback-form');
-});
+Route::get('/', [SurveyController::class, 'survey_view'])->name('survey.survey_view');
 
 // Authentication Routes
 Route::middleware(['guest'])->group(function() {
     Route::get('/login', [AuthenticationController::class, 'login_view'])->name('login.view');
     Route::post('/login', [AuthenticationController::class, 'login_process'])->name('login.process');
 });
+
+Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout');
 
 
 // Authenticated Users Routes
