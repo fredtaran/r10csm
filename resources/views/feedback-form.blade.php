@@ -19,10 +19,12 @@
                 <img src="{{ asset('img/mgb.png') }}" alt="MGB-X Header" class="formbold-form-img">
                 <img src="{{ asset('img/img001.png') }}" alt="ARTA Note" class="art-img" id="mobileAdjustableImage">
 
-                <form action="#" method="POST" style="padding: 20px;" id="survey_form">
+                <form action="{{ route('survey.save_survey_answer') }}" method="POST" style="padding: 20px;" id="survey_form">
                     <h3 style="text-align: center; font-weight: 700; margin-top: 12px;">
                     HELP US SERVE YOU BETTER! 
                     </h3>
+
+                    @csrf
 
                     <label class="formbold-form-label" style="text-indent: 40px; text-align: justify;">
                     This short Client Satisfaction Measurement (CSM) survey aims to track the customer experience of government offices. Your answers will enable this office to provide a better service.
@@ -105,8 +107,8 @@
 
                     <!-- SERVICE AVAILED -->
                     <div class="form-group">
-                        <label for="service_availed" class="form-label">Service Availed</label>
-                        <select name="service_availed" id="service_availed" class="form-control">
+                        <label for="service_id" class="form-label">Service Availed</label>
+                        <select name="service_id" id="service_id" class="form-control">
                             <option value="">--- Please select one ---</option>
                             @foreach ($services as $service)
                             <option value="{{ $service->id }}">{{ $service->service_code }} - {{ $service->service_name }}</option>
@@ -277,49 +279,345 @@
                             <b>SQD2:</b> The office accurately informed and followed the transaction&#39;s requirements and steps (Reliability)
                         </label>
 
-                        <div class="formbold-radio-flex">
-                            <div class="formbold-radio-group">
-                                <label class="formbold-radio-label">
-                                    <input class="formbold-input-radio" type="radio" name="sqd2" value="1" />
-                                    Strongly Disagree
-                                    <span class="formbold-radio-checkmark"></span>
-                                </label>
-                            </div>
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd2" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
 
-                            <div class="formbold-radio-group">
-                                <label class="formbold-radio-label">
-                                    <input class="formbold-input-radio" type="radio" name="sqd2" value="2" />
-                                    Disagree
-                                    <span class="formbold-radio-checkmark"></span>
-                                </label>
-                            </div>
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd2" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
 
-                            <div class="formbold-radio-group">
-                                <label class="formbold-radio-label">
-                                    <input class="formbold-input-radio" type="radio" name="sqd2" value="3" />
-                                    Neither Agree nor Disagree
-                                    <span class="formbold-radio-checkmark"></span>
-                                </label>
-                            </div>
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd2" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
 
-                            <div class="formbold-radio-group">
-                                <label class="formbold-radio-label">
-                                    <input class="formbold-input-radio" type="radio" name="sqd2" value="4" />
-                                    Agree
-                                    <span class="formbold-radio-checkmark"></span>
-                                </label>
-                            </div>
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd2" value="4" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
 
-                            <div class="formbold-radio-group">
-                                <label class="formbold-radio-label">
-                                    <input class="formbold-input-radio" type="radio" name="sqd2" value="5" />
-                                    Strongly Agree
-                                    <span class="formbold-radio-checkmark"></span>
-                                </label>
-                            </div>
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd2" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
                         </div>
                     </div>
                     <!-- SQD 2 END -->
+
+                    <!-- SQD 3 -->
+                    <div class="form-group">
+                        <label for="sqd3" class="formbold-form-label">
+                            <b>SQD3:</b> My online transaction (including steps and payment) was simple and convenient (Access and Facilities)
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd3" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd3" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd3" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd3" value="4" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd3" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 3 END -->
+
+                    <!-- SQD 4 -->
+                    <div class="form-group">
+                        <label for="sqd4" class="formbold-form-label">
+                            <b>SQD4:</b> I easily found information about my transaction from thee office or its website (Communication)
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd4" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd4" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd4" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd4" value="4" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd4" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 4 END -->
+
+                    <!-- SQD 5 -->
+                    <div class="form-group">
+                        <label for="sqd5" class="formbold-form-label">
+                            <b>SQD5:</b> I paid an acceptable amount of fees for my transaction (Costs)
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd5" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd5" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd5" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd5" value="4" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd5" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 5 END -->
+
+                    <!-- SQD 6 -->
+                    <div class="form-group">
+                        <label for="sqd6" class="formbold-form-label">
+                            <b>SQD6:</b> I am confident my online transaction was secure (Integrity)
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd6" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd6" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd6" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd6" value="4" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd6" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 6 END -->
+
+                    <!-- SQD 7 -->
+                    <div class="form-group">
+                        <label for="sqd7" class="formbold-form-label">
+                            <b>SQD7:</b> The office's online support was available, or (if asked questions) online support was quick to respond (Assurance) staff, and (if asked for help) the staff was helpful.
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd7" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd7" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd7" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd7" value="3" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd7" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 7 END -->
+
+                    <!-- SQD 8 -->
+                    <div class="form-group">
+                        <label for="sqd8" class="formbold-form-label">
+                            <b>SQD8:</b> I got what I needed from the government office (Outcome)
+                        </label>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd8" value="1" />
+                                Strongly Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd8" value="2" />
+                                Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd8" value="3" />
+                                Neither Agree nor Disagree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd8" value="3" />
+                                Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="formbold-radio-group">
+                            <label class="formbold-radio-label">
+                                <input class="formbold-input-radio" type="radio" name="sqd8" value="5" />
+                                Strongly Agree
+                                <span class="formbold-radio-checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- SQD 8 END -->
+
+                    <!-- Remarks -->
+                    <div class="form-group">
+                        <label for="message" class="formbold-form-label">
+                        REMARKS (optional):
+                        </label>
+
+                        <textarea rows="6" name="remarks" placeholder="Type here..." class="formbold-form-input"></textarea>
+                    </div>
+                    <!-- Remarks END -->
 
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
@@ -341,8 +639,7 @@
                 // Form validation
                 $.validator.setDefaults({
                     submitHandler: function (form) {
-                        // form.submit();
-                        alert("s")
+                        form.submit();
                     }
                 });
 
@@ -370,7 +667,7 @@
                             required: true
                         },
 
-                        service_availed: {
+                        service_id: {
                             required: true
                         },
 
@@ -458,7 +755,7 @@
                             required: "This field is required."
                         },
 
-                        service_availed: {
+                        service_id: {
                             required: "This field is required."
                         },
 

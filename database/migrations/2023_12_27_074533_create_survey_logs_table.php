@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('cc1');
             $table->unsignedSmallInteger('cc2');
             $table->unsignedSmallInteger('cc3');
+            $table->longtext('cc3_remarks')->nullable();
             $table->unsignedSmallInteger('sqd1');
             $table->unsignedSmallInteger('sqd2');
             $table->unsignedSmallInteger('sqd3');
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('sqd6');
             $table->unsignedSmallInteger('sqd7');
             $table->unsignedSmallInteger('sqd8');
-            $table->longtext('remark');
+            $table->longtext('remark')->nullable();
             $table->timestamps();
         });
     }

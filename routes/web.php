@@ -17,6 +17,7 @@ use App\Http\Controllers\SurveyController;
 */
 
 Route::get('/', [SurveyController::class, 'survey_view'])->name('survey.survey_view');
+Route::post('/', [SurveyController::class, 'save_survey_answer'])->name('survey.save_survey_answer');
 
 // Authentication Routes
 Route::middleware(['guest'])->group(function() {
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Services
     Route::get('services', [AuthenticatedController::class, 'services_view'])->name('services.view');
     Route::post('services', [AuthenticatedController::class, 'save_service'])->name('services.save_service');
     Route::get('services/all', [AuthenticatedController::class, 'get_services'])->name('services.get_services');

@@ -24,8 +24,6 @@ class AuthenticationController extends Controller
 
         // Authenticated credentials
         if(Auth::attempt($credentials, true)) {
-            // Generate a session
-            $request->session->regenerate();
 
             return redirect()->intended('dashboard');
         }
