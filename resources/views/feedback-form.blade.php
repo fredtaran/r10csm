@@ -19,6 +19,16 @@
                 <img src="{{ asset('img/mgb.png') }}" alt="MGB-X Header" class="formbold-form-img">
                 <img src="{{ asset('img/img001.png') }}" alt="ARTA Note" class="art-img" id="mobileAdjustableImage">
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('survey.save_survey_answer') }}" method="POST" style="padding: 20px;" id="survey_form">
                     <h3 style="text-align: center; font-weight: 700; margin-top: 12px;">
                     HELP US SERVE YOU BETTER! 
@@ -686,7 +696,11 @@
                         cc3: {
                             required: {
                                 depends: function(element) {
-                                    return $("input[name='cc2']:checked").val() != 3
+                                    if($("input[name='cc2']:checked").val() != 3 && $("input[name='cc1']:checked").val() != 3) {
+                                        return true
+                                    } else {
+                                        return false
+                                    }
                                 }
                             }
                         },

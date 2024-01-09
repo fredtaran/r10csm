@@ -10,6 +10,7 @@ class SurveyLog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'control_no',
         'division_id',
         'service_id',
         'age',

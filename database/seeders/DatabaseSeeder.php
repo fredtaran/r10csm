@@ -19,5 +19,10 @@ class DatabaseSeeder extends Seeder
             'username' => 'fred.taran',
             'password' => bcrypt("@dmin123"),
         ]);
+
+        $this->call([
+            DivisionSeeder::class,
+            ServicesSeeder::class,
+        ]);
     }
 }

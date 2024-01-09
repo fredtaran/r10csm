@@ -11,6 +11,16 @@ use App\Models\Division;
 
 class AuthenticatedController extends Controller
 {
+    // Dashboard view
+    public function dashboard_view() {
+        $divisions = Division::with('services')->get();
+
+        return view('dashboard')->with([
+            'divisions' => $divisions,
+            
+        ]);
+    }
+
     // Services view
     public function services_view() {
         // Get all divisions

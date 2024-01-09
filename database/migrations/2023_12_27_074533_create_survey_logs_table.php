@@ -24,8 +24,8 @@ return new class extends Migration
             $table->unsignedInteger('client_type'); // 1 - Citizen, 2 - Business, 3 - Government
             $table->string('agency_visited');
             $table->unsignedSmallInteger('cc1');
-            $table->unsignedSmallInteger('cc2');
-            $table->unsignedSmallInteger('cc3');
+            $table->unsignedSmallInteger('cc2')->nullable();
+            $table->unsignedSmallInteger('cc3')->nullable();
             $table->longtext('cc3_remarks')->nullable();
             $table->unsignedSmallInteger('sqd1');
             $table->unsignedSmallInteger('sqd2');

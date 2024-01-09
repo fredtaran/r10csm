@@ -28,8 +28,8 @@ class SurveyController extends Controller
             'client_type' => 'required',
             'agency_visited' => 'required',
             'cc1' => 'required',
-            'cc2' => 'required',
-            'cc3' => 'required',
+            'cc2' => '',
+            'cc3' => '',
             'sqd1' => 'required',
             'sqd2' => 'required',
             'sqd3' => 'required',
@@ -42,12 +42,51 @@ class SurveyController extends Controller
 
         $service = Service::where('id', $data['service_id'])->get('division_id');
 
-        dd(array_merge($request->all(), [
-            'division_id' => $service[0]->division_id
-        ]));
+        $latest_survey_log = SurveyLog::latest('created_at')->first();
 
-        // SurveyLog::create(array_merge($request->validated(), [
-        //     'division_id' => $service->division_id
-        // ]));
+        if(is_null($latest_survey_log)) {
+            // year-month-sequence
+            $control_number = sprintf("%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+
+            SurveyLog::create(array_merge($data, [
+                'control_no' => $control_number,
+                'division_id' => $service[0]->division_id
+            ]));
+        } else {
+            $latest_control_no = $latest_survey_log->control_no;
+            $explode_control_no = explode("-", $latest_control_no);
+
+            // Check if year is same with the current year
+            if($explode_control_no[0] == date('Y')) {
+                // Check if month is equal to current month
+                if($explode_control_no[1] == date('m')) {
+                    // year-month-sequence
+                    $control_number = sprintf("%u-%s-%s", $explode_control_no[0], str_pad($explode_control_no[1], 2, '0', STR_PAD_LEFT), str_pad($explode_control_no[2] + 1, 4, '0', STR_PAD_LEFT));
+
+                    SurveyLog::create(array_merge($data, [
+                        'control_no' => $control_number,
+                        'division_id' => $service[0]->division_id
+                    ]));
+                } else {
+                    // year-month-sequence
+                    $control_number = sprintf("%u-%s-%s", $explode_control_no[0], str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+
+                    SurveyLog::create(array_merge($data, [
+                        'control_no' => $control_number,
+                        'division_id' => $service[0]->division_id
+                    ]));
+                }
+            } else {
+                // year-month-sequence
+                $control_number = sprintf("%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+
+                SurveyLog::create(array_merge($data, [
+                    'control_no' => $control_number,
+                    'division_id' => $service[0]->division_id
+                ]));
+            }
+        }
+
+        return redirect()->route('survey.survey_view');
     }
 }

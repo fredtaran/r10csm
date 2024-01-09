@@ -25,12 +25,12 @@ class AuthenticationController extends Controller
         // Authenticated credentials
         if(Auth::attempt($credentials, true)) {
 
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
             'username' => 'The provided credentials do not match our records.'
-        ]);
+        ])->onlyInput('username');
     }
 
     // Logout process

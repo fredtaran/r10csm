@@ -13,4 +13,8 @@ class Division extends Model
         'division_name',
         'division_code'
     ];
+
+    public function services() {
+        return $this->hasMany(Service::class, 'division_id', 'id');
+    }
 }

@@ -30,9 +30,7 @@ Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout'
 
 // Authenticated Users Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('dashboard', function() {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [AuthenticatedController::class, 'dashboard_view'])->name('dashboard');
 
     // Services
     Route::get('services', [AuthenticatedController::class, 'services_view'])->name('services.view');

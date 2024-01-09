@@ -32,9 +32,15 @@
 
                 <h5 class="mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
+                @error('username')
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    {{ $message }}
+                </div>
+                @enderror
+
                 <div class="form-outline mb-4 form-group">
                   <label for="username">Username</label>
-                  <input type="text" id="username" name="username" class="form-control" autocomplete="off" />
+                  <input type="text" id="username" name="username" class="form-control" value="{{ old('username') }}" />                  
                 </div>
 
                 <div class="form-outline mb-4 form-group">
