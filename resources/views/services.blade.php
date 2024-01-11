@@ -278,7 +278,9 @@ $(function () {
         ajax: "{{ route('services.get_services') }}",
         columns: [
             { data: 'service_code' },
-            { data: 'service_name' },
+            { 
+                data: 'service_name',
+            },
             { 
                 data: 'division',
                 render: function(data, type, row, meta) {
@@ -290,9 +292,11 @@ $(function () {
                 render: function (data, type, row) {
                     return `<button type="button" class="btn btn-primary btn-sm updateBtn" title="Edit"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-warning btn-sm deleteBtn" title="Delete"><i class="fa fa-trash-alt"></i></button>`;
-                }
+                },
+                width: "8%"
             }
-        ]
+        ],
+        responsive: true
     });
 
     serviceTable.on('click', '.updateBtn', function() {
@@ -332,26 +336,28 @@ $(function () {
             confirmButtonText: "Yes, delete!",
             cancelButtonText: "Cancel"
         }).then(function(result) {
-            $.ajax({
-                url: "{{ url('service') }}/" + rowData.id + "/delete",
-                type: 'DELETE',
-                dataType: 'json',
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                },
-                success: function(response) {
-                    Swal.fire({
-                        title: "Success Message",
-                        text: response.message,
-                        icon: "info"
-                    });
+            if(result.value) {
+                $.ajax({
+                    url: "{{ url('service') }}/" + rowData.id + "/delete",
+                    type: 'DELETE',
+                    dataType: 'json',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            title: "Success Message",
+                            text: response.message,
+                            icon: "info"
+                        });
 
-                    serviceTable.ajax.reload();
-                },
-                error: function(xhr, response, error) {
-                    console.log(error);
-                }
-            });
+                        serviceTable.ajax.reload();
+                    },
+                    error: function(xhr, response, error) {
+                        console.log(error);
+                    }
+                });
+            }
         });
     })
     // End of delete button function

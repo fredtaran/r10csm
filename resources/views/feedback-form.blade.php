@@ -72,7 +72,7 @@
 
                     <!-- REGION -->
                     <div class="form-group">
-                        <label for="region" class="form-label">Region</label>
+                        <label for="region" class="form-label">Region of Residence</label>
                         <select name="region" id="region" class="form-control">
                             <option value="">--- Please select your region ---</option>
                             <option value="NCR">National Capital Region</option>
@@ -87,7 +87,7 @@
                             <option value="7">Region 7 - Central Visayas</option>
                             <option value="8">Region 8 - Eastern Visayas</option>
                             <option value="9">Region 9 - Zamboanga Peninsula</option>
-                            <option value="10">Region 10 - Northern Mindanao</option>
+                            <option value="10" selected>Region 10 - Northern Mindanao</option>
                             <option value="11">Region 11 - Davao Region</option>
                             <option value="12">Region 12 - Soccksargen</option>
                             <option value="13">Region 13 - Caraga</option>
@@ -111,7 +111,7 @@
                     <!-- AGENCY VISITED -->
                     <div class="form-group">
                         <label for="agency_visited" class="form-label"> Agency Visited </label>
-                        <input type="text" name="agency_visited" class="form-control" id="agency_visited"/>
+                        <input type="text" name="agency_visited" class="form-control" id="agency_visited" value="MGB-X"/>
                     </div>
                     <!-- AGENCY VISITED END -->
 

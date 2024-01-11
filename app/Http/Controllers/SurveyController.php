@@ -17,7 +17,7 @@ class SurveyController extends Controller
         return view('feedback-form')->with(['services' => $services]);
     }
 
-    // Save survey to db
+    // Save survey to db - ONLINE BASE
     public function save_survey_answer(Request $request) {
         // Validate inputs
         $data = $request->validate([
@@ -46,7 +46,7 @@ class SurveyController extends Controller
 
         if(is_null($latest_survey_log)) {
             // year-month-sequence
-            $control_number = sprintf("%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+            $control_number = sprintf("OL-%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
 
             SurveyLog::create(array_merge($data, [
                 'control_no' => $control_number,
@@ -61,7 +61,7 @@ class SurveyController extends Controller
                 // Check if month is equal to current month
                 if($explode_control_no[1] == date('m')) {
                     // year-month-sequence
-                    $control_number = sprintf("%u-%s-%s", $explode_control_no[0], str_pad($explode_control_no[1], 2, '0', STR_PAD_LEFT), str_pad($explode_control_no[2] + 1, 4, '0', STR_PAD_LEFT));
+                    $control_number = sprintf("OL-%u-%s-%s", $explode_control_no[0], str_pad($explode_control_no[1], 2, '0', STR_PAD_LEFT), str_pad($explode_control_no[2] + 1, 4, '0', STR_PAD_LEFT));
 
                     SurveyLog::create(array_merge($data, [
                         'control_no' => $control_number,
@@ -69,7 +69,7 @@ class SurveyController extends Controller
                     ]));
                 } else {
                     // year-month-sequence
-                    $control_number = sprintf("%u-%s-%s", $explode_control_no[0], str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+                    $control_number = sprintf("OL-%u-%s-%s", $explode_control_no[0], str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
 
                     SurveyLog::create(array_merge($data, [
                         'control_no' => $control_number,
@@ -78,7 +78,7 @@ class SurveyController extends Controller
                 }
             } else {
                 // year-month-sequence
-                $control_number = sprintf("%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
+                $control_number = sprintf("OL-%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
 
                 SurveyLog::create(array_merge($data, [
                     'control_no' => $control_number,

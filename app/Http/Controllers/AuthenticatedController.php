@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,49 @@ class AuthenticatedController extends Controller
 {
     // Dashboard view
     public function dashboard_view() {
+        // Get Citizen Charter 1 survey logs
+        $cc1_result = DB::table('survey_logs')
+                        ->selectRaw('(SELECT COUNT(cc1) FROM survey_logs WHERE cc1 = 1 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc1_1')
+                        ->selectRaw('(SELECT COUNT(cc1) FROM survey_logs WHERE cc1 = 2 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc1_2')
+                        ->selectRaw('(SELECT COUNT(cc1) FROM survey_logs WHERE cc1 = 3 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc1_3')
+                        ->first();
+
+        // Get Citizen Charter 1 survey logs
+        $cc2_result = DB::table('survey_logs')
+                        ->selectRaw('(SELECT COUNT(cc2) FROM survey_logs WHERE cc2 = 1 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc2_1')
+                        ->selectRaw('(SELECT COUNT(cc2) FROM survey_logs WHERE cc2 = 2 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc2_2')
+                        ->selectRaw('(SELECT COUNT(cc2) FROM survey_logs WHERE cc2 = 3 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc2_3')
+                        ->first();
+
+        // Get Citizen Charter 1 survey logs
+        $cc3_result = DB::table('survey_logs')
+                        ->selectRaw('(SELECT COUNT(cc3) FROM survey_logs WHERE cc3 = 1 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc3_1')
+                        ->selectRaw('(SELECT COUNT(cc3) FROM survey_logs WHERE cc3 = 2 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc3_2')
+                        ->selectRaw('(SELECT COUNT(cc3) FROM survey_logs WHERE cc3 = 3 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) AS cc3_3')
+                        ->first();
+
+        // Get count for male and female
+        $sex_count = DB::table('survey_logs')
+                        ->selectRaw('(SELECT COUNT(sex) FROM survey_logs WHERE sex = 1 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) as male')
+                        ->selectRaw('(SELECT COUNT(sex) FROM survey_logs WHERE sex = 0 AND YEAR(survey_logs.created_at) = YEAR(CURDATE())) as female')
+                        ->first();
+
+        // Get number of online and f2f respondents
+        $no_of_respondents = DB::table('survey_logs')
+                                ->selectRaw("(SELECT COUNT(*) FROM survey_logs WHERE control_no LIKE '%OL%' AND YEAR(created_at) = YEAR(CURDATE())) AS online_respondents")
+                                ->selectRaw("(SELECT COUNT(*) FROM survey_logs WHERE control_no LIKE '%F2F%' AND YEAR(created_at) = YEAR(CURDATE())) AS f2f_respondents")
+                                ->first();
+
+        // Get divisions with services
         $divisions = Division::with('services')->get();
 
         return view('dashboard')->with([
+            'cc1_result' => $cc1_result,
+            'cc2_result' => $cc2_result,
+            'cc3_result' => $cc3_result,
+            'sex_count' => $sex_count,
             'divisions' => $divisions,
-            
+            'no_of_respondents' => $no_of_respondents
         ]);
     }
 

@@ -123,7 +123,7 @@
                         </a>
                     </li>
                 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="pages/widgets.html" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -131,7 +131,7 @@
                                 <span class="right badge badge-danger">New</span>
                             </p>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link">
@@ -192,6 +192,7 @@
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- ChartJS -->
         <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@1"></script>
         <!-- Sparkline -->
         <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
         <!-- JQVMap -->
