@@ -128,4 +128,13 @@ class AuthenticatedController extends Controller
             return response()->json(['message' => "An errro has been encountered."], 500);
         }
     }
+
+    // Services individual details
+    public function service_detail($id) {
+        $service = Service::findOrFail($id);
+
+        return view('service_detail')->with([
+            'service' => $service
+        ]);
+    }
 }

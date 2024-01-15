@@ -155,7 +155,9 @@
                     <div class="card-body">
                         <ol>
                         @foreach ($division->services as $service)
-                            <li>{{ $service->service_name }}</li>
+                            <a href="{{ route('services.service_detail', $service->id) }}" target="_blank">
+                                <li>{{ $service->service_name }}</li>
+                            </a>
                         @endforeach
                         </ol>
                     </div>

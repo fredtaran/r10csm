@@ -39,5 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('service/{id}/edit', [AuthenticatedController::class, 'get_service'])->name('services.get_service');
     Route::post('service/{id}/edit', [AuthenticatedController::class, 'update_service'])->name('services.update_service');
     Route::delete('service/{id}/delete', [AuthenticatedController::class, 'delete_service'])->name('services.delete_service');
+    Route::get('service/{id}', [AuthenticatedController::class, 'service_detail'])->name('services.service_detail');
 });
 
