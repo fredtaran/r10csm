@@ -57,11 +57,11 @@ class SurveyController extends Controller
             $explode_control_no = explode("-", $latest_control_no);
 
             // Check if year is same with the current year
-            if($explode_control_no[0] == date('Y')) {
+            if($explode_control_no[1] == date('Y')) {
                 // Check if month is equal to current month
-                if($explode_control_no[1] == date('m')) {
+                if($explode_control_no[2] == date('m')) {
                     // year-month-sequence
-                    $control_number = sprintf("OL-%u-%s-%s", $explode_control_no[0], str_pad($explode_control_no[1], 2, '0', STR_PAD_LEFT), str_pad($explode_control_no[2] + 1, 4, '0', STR_PAD_LEFT));
+                    $control_number = sprintf("OL-%u-%s-%s", $explode_control_no[1], str_pad($explode_control_no[2], 2, '0', STR_PAD_LEFT), str_pad($explode_control_no[3] + 1, 4, '0', STR_PAD_LEFT));
 
                     SurveyLog::create(array_merge($data, [
                         'control_no' => $control_number,
@@ -77,6 +77,7 @@ class SurveyController extends Controller
                     ]));
                 }
             } else {
+                dd('herer');
                 // year-month-sequence
                 $control_number = sprintf("OL-%u-%s-%s", date('Y'), str_pad((string)date('m'), 2, '0', STR_PAD_LEFT), str_pad('1', 4, '0', STR_PAD_LEFT));
 

@@ -35,7 +35,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Respondents | Face-to-Face</span>
-                        <span class="info-box-number">{{ $no_of_respondents->f2f_respondents }}</span>
+                        <span class="info-box-number">{{ @$no_of_respondents->f2f_respondents }}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -50,7 +50,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Respondents | Online</span>
-                        <span class="info-box-number">{{ $no_of_respondents->online_respondents }}</span>
+                        <span class="info-box-number">{{ @$no_of_respondents->online_respondents }}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -66,7 +66,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Male</span>
-                        <span class="info-box-number">{{ $sex_count->male }}</span>
+                        <span class="info-box-number">{{ @$sex_count->male }}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -81,7 +81,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Number of Female</span>
-                        <span class="info-box-number">{{ $sex_count->female }}</span>
+                        <span class="info-box-number">{{ @$sex_count->female }}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -186,7 +186,7 @@
 
         datasets: [{
             data: [
-                {{ $cc1_result->cc1_1 }}, {{ $cc1_result->cc1_2 }}, {{ $cc1_result->cc1_3 }}
+                {{ @$cc1_result->cc1_1 }}, {{ @$cc1_result->cc1_2 }}, {{ @$cc1_result->cc1_3 }}
             ],
 
             backgroundColor: [
@@ -241,7 +241,7 @@
 
         datasets: [{
             data: [
-                {{ $cc2_result->cc2_1 }}, {{ $cc2_result->cc2_2 }}, {{ $cc2_result->cc2_3 }}
+                {{ @$cc2_result->cc2_1 }}, {{ @$cc2_result->cc2_2 }}, {{ @$cc2_result->cc2_3 }}
             ],
 
             backgroundColor: [
@@ -296,7 +296,7 @@
 
         datasets: [{
             data: [
-                {{ $cc3_result->cc3_1 }}, {{ $cc3_result->cc3_2 }}, {{ $cc3_result->cc3_3 }}
+                {{ @$cc3_result->cc3_1 }}, {{ @$cc3_result->cc3_2 }}, {{ @$cc3_result->cc3_3 }}
             ],
 
             backgroundColor: [
